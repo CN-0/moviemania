@@ -1,0 +1,11 @@
+<ng-template #vedioContent let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title">Modal title</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div *ngIf="vedioKey" class="modal-body">
+        <iframe type="text/html" width="100%" height="580px" [src]="safeURL" frameborder="0" allowfullscreen></iframe>
+    </div>
+</ng-template>

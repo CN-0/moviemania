@@ -1,0 +1,107 @@
+<div class="movie">
+    <div *ngIf="tv" class="header" [style.background-image]="'linear-gradient(to right, #303030ff, #505050da), url(http://image.tmdb.org/t/p/original'+tv.backdrop_path+')'">
+        <div class="poster">
+            <img class="image" src="{{'http://image.tmdb.org/t/p/w342'+tv.poster_path}}">
+            <a class="watch-now" href={{tv.homepage}} target="_blank">Watch Now</a>
+        </div>
+        <div class="content">
+            <div class="title">
+                {{tv.name}}
+            </div>
+            <div>
+                <ng-template #t let-fill="fill">
+                    <span class="star" [class.full]="fill === 100">
+                    <span class="half" [style.width.%]="fill">&hearts;</span>&hearts;
+                    </span>
+                </ng-template>
+                <div class="rating">
+                <ngb-rating [(rate)]="currentRate" [starTemplate]="t" [readonly]="true" [max]="5"></ngb-rating>
+                </div>
+            </div>
+            <div class="description">
+                <h4>Overview</h4>
+                <p>{{tv.overview}}</p>
+            </div>
+            <div class="keywords">
+                <h3>Keywords</h3>
+                <div *ngFor="let item of keywords">{{item.name}}</div>
+            </div>
+            <div class="keywords">
+                <h3>Genres</h3>
+                <div *ngFor="let item of tv.genres">{{item.name}}</div>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="creators" class="creator">
+        <h4>Cast</h4>
+        <div class="creator-list">
+            <div *ngFor="let item of creators.cast" >
+            <div class="creators-card" [routerLink]="['/person',item.id]">
+                <img *ngIf="item.profile_path" class="creator-image" alt={{item.name}} src="{{'http://image.tmdb.org/t/p/w185'+item.profile_path}}">
+                <div class="footer">
+                    <h6>{{item.name}}</h6>
+                    <p>{{item.character}}</p>
+                </div>
+            </div>                
+        </div>
+        </div>
+    </div>
+    <div *ngIf="creators" class="creator">
+        <h4>Crew</h4>
+        <div class="creator-list">
+            <div *ngFor="let item of creators.crew" >
+            <div class="creators-card" [routerLink]="['/person',item.id]">
+                <img *ngIf="item.profile_path" class="creator-image" alt={{item.name}} src="{{'http://image.tmdb.org/t/p/w185'+item.profile_path}}">
+                <div class="footer">
+                    <h6>{{item.name}}</h6>
+                    <p>{{item.job}}</p>
+                </div>
+            </div>                
+        </div>
+        </div>
+    </div>
+    <div *ngIf="reviews" class="review">
+        <h3 style="margin-left : 50px">Reviews</h3>
+        <div *ngFor="let item of reviews" class="rev-content">
+            <h4 class="rev-name">{{item.author}}</h4>
+            <p class="rev-reviews">{{item.content}}</p>
+        </div>
+    </div>
+    <div *ngIf="vedios">
+        <div class="vedios-div" [style.background-image]="'linear-gradient(to right bottom, #e3f2fd57, #d3f2fd57), url(http://image.tmdb.org/t/p/original'+backgroundImage+')'" >
+            <div class="ved-header">
+                <h3 class="ved-heading">Vedios</h3>
+            </div>
+            <div class="ved-trailers">
+                <div *ngFor = "let item of vedios">
+                    <div class="ved-trailercard">
+                        <div class="ved-cardheader" (click)="openVedio(item.key)">
+                            <img class="ved-image" src="{{'https://img.youtube.com/vi/'+item.key+'/hqdefault.jpg'}}">
+                            <svg viewBox="0 0 16 16" class="bi bi-play-fill play" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M11.596 8.697l-6.363 3.692c-.54.313-1.233-.066-1.233-.697V4.308c0-.63.692-1.01 1.233-.696l6.363 3.692a.802.802 0 0 1 0 1.393z"/>
+                            </svg>
+                        </div>
+                        <div class="ved-content">
+                            <p class="ved-title">{{item.name }}</p>
+                        </div>
+                    </div>        
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="recomendations" *ngIf="recomendations" >
+        <h3>Recomendations</h3>
+        <div class="recomendationsList">
+            <app-moviecard *ngFor="let recEl of recomendations" [Tvcard]="recEl"></app-moviecard>
+        </div>
+    </div>
+</div>
+<!--<svg width="80px" height="80px" viewBox="0 0 16 16" class="bi bi-heart-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+  <linearGradient id="lg" x1="0" y1=".5" x2="1" y2=".5">
+      <stop offset="0%" stop-opacity="1" stop-color="royalblue"/>
+      <stop offset="90%" stop-opacity="1" stop-color="royalblue"/>
+      <stop offset="90%" stop-opacity="0" stop-color="royalblue"/>
+      <stop offset="100%" stop-opacity="0" stop-color="royalblue"/>
+  </linearGradient>
+  <path fill-rule="evenodd" fill="url(#lg)" stroke="crimson" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
+</svg> -->

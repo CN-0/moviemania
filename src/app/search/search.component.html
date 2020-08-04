@@ -1,0 +1,63 @@
+<div class="contain">
+    <div class="search">
+        <div class="search-left">
+            <h5 class="heading">Search Results</h5>
+            <div class="menu">
+                <h6 class="menu-item" (click)="searchMovie()" [class.active]="type==='movie'">Movies</h6>
+                <h6 class="menu-item" (click)="searchTv()" [class.active]="type==='tv'">Tv Shows</h6>
+                <h6 class="menu-item" (click)="searchPerson()" [class.active]="type==='person'">People</h6>
+                <h6 class="menu-item" (click)="searchKeyword()" [class.active]="type==='keyword'">Keywords</h6>
+            </div>
+        </div>
+        <div class="results">
+            <ng-container *ngIf="MovieList">
+                <div *ngFor="let item of MovieList">
+                    <div class="search-result"  [routerLink]="['/movie',item.id]">
+                        <img class="image" src="{{'http://image.tmdb.org/t/p/w300'+item.poster_path}}">
+                        <div class="search-content">
+                            <h5 class="title">{{item.name || item.title}}</h5>
+                            <p class="rel-date">{{item.release_date || item.first_air_date}}</p>
+                            <p class="overview">{{item.overview | slice:0:200}}</p>
+                        </div>
+                    </div>
+                </div>
+            </ng-container>
+            <ng-container *ngIf="TvList">
+                <div *ngFor="let item of TvList">
+                    <div class="search-result" [routerLink]="['/tv',item.id]">
+                        <img class="image" src="{{'http://image.tmdb.org/t/p/w300'+item.poster_path}}">
+                        <div class="search-content">
+                            <h5 class="title">{{item.name || item.title}}</h5>
+                            <p class="rel-date">{{item.release_date || item.first_air_date}}</p>
+                            <p class="overview">{{item.overview | slice:0:200}}</p>
+                        </div>
+                    </div>
+                </div>
+            </ng-container>
+            <ng-container *ngIf="PersonList">
+                <div *ngFor="let item of PersonList; let i = index">
+                    <div class="search-result" [routerLink]="['/person',item.id]">
+                        <img class="image" src="{{'http://image.tmdb.org/t/p/w300'+item.profile_path}}">
+                        <div class="search-content">
+                            <h5 class="title">{{item.name}}</h5>
+                            <p class="rel-date">{{item.known_for_department}}</p>
+                            <div class="knownfor">
+                                <div *ngFor="let kfitem of item.known_for" >
+                                    <p class="knownfor-item">{{kfitem.name || kfitem.title}}</p>
+                                </div> 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </ng-container>
+            <ng-container *ngIf="KeyWords">
+                <div class="keywords">
+                    <div *ngFor="let item of KeyWords">
+                        <p>{{item.name}}</p>
+                    </div>
+                </div>
+            </ng-container>
+        </div>
+    </div>
+    <a class="button" (click)="loadMore()">Load More</a> 
+</div>

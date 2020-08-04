@@ -1,0 +1,24 @@
+<div class="moviecard">
+    <div [routerLink]="['/movie/',Moviecard.id]" *ngIf="Moviecard" >
+        <div class="header">
+            <img class="image" src="{{'http://image.tmdb.org/t/p/w300'+Moviecard.poster_path}}">
+            <div class="rating" >
+                {{Moviecard.vote_average}}
+            </div>
+        </div>
+        <div class="content">
+            <p class="title">{{ Moviecard.title || Moviecard.name }}</p>
+        </div>
+    </div>
+    <div [routerLink]="['/tv/',Tvcard.id]" *ngIf="Tvcard" >
+        <div class="header">
+            <img class="image" src="{{'http://image.tmdb.org/t/p/w300'+Tvcard.poster_path}}">
+            <div class="rating" >
+                {{Tvcard.vote_average}}
+            </div>
+        </div>
+        <div class="content">
+            <p class="title">{{ Tvcard.name }}</p>
+        </div>
+    </div>
+</div>

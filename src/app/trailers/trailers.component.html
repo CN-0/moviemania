@@ -1,0 +1,22 @@
+<ng-container *ngIf="trailersData">
+    <div class="trending" [style.background-image]="'linear-gradient(to right bottom, #e3f2fd57, #d3f2fd57), url(http://image.tmdb.org/t/p/original'+backgroundImage+')'" >
+        <div class="header">
+            <h3 class="heading">Trailers</h3>
+        </div>
+        <div class="trailers">
+            <div  *ngFor="let trailerEl of trailersData">
+                <div class="trailercard" (click)="openVedio(trailerEl.id)" (mouseover)="backgroundImage=trailerEl.backdrop_path">
+                    <div class="cardheader">
+                        <img class="image" src="{{'http://image.tmdb.org/t/p/w300'+trailerEl.backdrop_path}}">
+                        <svg viewBox="0 0 16 16" class="bi bi-play-fill play" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M11.596 8.697l-6.363 3.692c-.54.313-1.233-.066-1.233-.697V4.308c0-.63.692-1.01 1.233-.696l6.363 3.692a.802.802 0 0 1 0 1.393z"/>
+                        </svg>
+                    </div>
+                    <div class="content">
+                        <p class="title">{{ trailerEl.title || trailerEl.name }}</p>
+                    </div>
+                </div>        
+            </div>
+        </div>
+    </div>
+</ng-container>

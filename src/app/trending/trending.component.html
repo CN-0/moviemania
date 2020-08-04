@@ -1,0 +1,17 @@
+<div class="trending">
+    <div class="header">
+        <h3 class="heading">Trending</h3>
+        <div class="toggle">
+            <a class="toggle-item" [class.active-item]="today" (click)="today=true" >Today</a>
+            <a class="toggle-item" [class.active-item]="!today" (click)="changeList()" >This Week</a>
+        </div>
+    </div>
+    <div class="trending-cards">
+        <ng-container *ngIf="today" >
+            <app-moviecard *ngFor="let trendingEl of trendingToday" [Moviecard]="trendingEl"></app-moviecard>
+        </ng-container>
+        <ng-container *ngIf="!today" >
+            <app-moviecard *ngFor="let trendingEl of trendingWeek" [Moviecard]="trendingEl"></app-moviecard>
+        </ng-container>
+    </div>
+</div>

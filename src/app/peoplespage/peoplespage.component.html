@@ -1,0 +1,14 @@
+<div *ngIf="PeoplesList" class="creator">
+    <h4 class="heading">Popular People</h4>
+    <div class="creator-list">
+        <div *ngFor="let item of PeoplesList" >
+            <div [routerLink]="['/person',item.id]" class="creators-card">
+                <img *ngIf="item.profile_path" class="creator-image" alt={{item.name}} src="{{'http://image.tmdb.org/t/p/w185'+item.profile_path}}">
+                <div class="footer">
+                    <h6>{{item.name}}</h6>
+                </div>
+            </div>                
+        </div>
+    </div>
+    <ngb-pagination class="pn" [collectionSize]="totalResults" [pageSize]="20" [(page)]="page" (pageChange)="pageChanged()" [maxSize]="9" [rotate]="true" [ellipses]="true" ></ngb-pagination>
+</div>
