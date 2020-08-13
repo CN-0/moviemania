@@ -1,8 +1,7 @@
 import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
-import { TrendingCard } from '../trending/trendingcard.model';
-import { DataService } from '../data.service';
+import { MovieCard } from '../shared/moviecard.model';
 import { VedioPlayerService } from '../vedioplayer/vedioplayer.service';
 
 @Component({
@@ -11,18 +10,12 @@ import { VedioPlayerService } from '../vedioplayer/vedioplayer.service';
   styleUrls: ['./trailers.component.css']
 })
 export class TrailersComponent implements OnInit {
-  trailersData: TrendingCard[];
-  backgroundImage: string;
+  @Input() trailersData: MovieCard[];
+  @Input() backgroundImage: string;
 
-  constructor(private http: HttpClient, private dataService: DataService, private vedioService: VedioPlayerService) { }
+  constructor(private http: HttpClient, private vedioService: VedioPlayerService) { }
 
-  ngOnInit(): void {
-    this.dataService.trailerDataEmitter
-      .subscribe(data => {
-        this.trailersData = data;
-        this.backgroundImage = data[0].backdrop_path;
-      });
-  }
+  ngOnInit(): void {}
   openVedio(id: any): void{
     this.http
       .get<{id: number, results: {

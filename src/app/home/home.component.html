@@ -1,6 +1,54 @@
 <div class="home">
-    <app-carousel></app-carousel>
-    <app-popular></app-popular>
-    <app-trailers></app-trailers>  
-    <app-trending></app-trending>
+    <div class='car' *ngIf="CarousalData">
+        <ngb-carousel> 
+            <ng-template ngbSlide *ngFor="let item of CarousalData">  
+            <div class="picsum-img-wrapper">
+              <img src="{{'http://image.tmdb.org/t/p/original'+item.backdrop_path}}" class="img-fluid rounded carousel-image" alt={{item.title}}> 
+            </div>
+            <div class="carousel-caption">
+              <h3 class="title">{{item.title || item.name}}</h3>
+            </div>
+          </ng-template> 
+        </ngb-carousel>  
+    </div>
+    <div class="trending" *ngIf="Streaming">
+        <div class="header">
+            <h3 class="heading">What's Popular</h3>
+            <div class="toggle">
+                <a class="toggle-item" [class.active-item]="display==='streaming'" (click)="display='streaming'"><p [class.toggle-active-text]="display==='streaming'" class="toggle-text">Streaming</p></a>
+                <a class="toggle-item"  [class.active-item]="display==='ontv'" (click)="loadOntv()" ><p [class.toggle-active-text]="display==='ontv'" class="toggle-text">On Tv</p></a>
+                <a class="toggle-item" [class.active-item]="display==='intheaters'" (click)="loadInTheaters()" ><p [class.toggle-active-text]="display==='intheaters'" class="toggle-text">In Theaters</p></a>
+            </div>
+        </div>
+        <div class="trending-cards">
+            <ng-container *ngIf="display==='streaming'" >
+                <app-moviecard *ngFor="let popularEl of Streaming" [Moviecard]="popularEl"></app-moviecard>
+            </ng-container>
+            <ng-container *ngIf="display==='ontv'" >
+                <app-moviecard *ngFor="let popularEl of Ontv" [Tvcard]="popularEl"></app-moviecard>
+            </ng-container>
+            <ng-container *ngIf="display==='intheaters'" >
+                <app-moviecard *ngFor="let popularEl of Intheaters" [Moviecard]="popularEl"></app-moviecard>
+            </ng-container>
+        </div>
+    </div>    
+    <app-trailers *ngIf="trendingToday" [trailersData]="trendingToday" [backgroundImage]="trendingToday[0].backdrop_path" ></app-trailers>  
+    <div class="trending" *ngIf="trendingToday">
+        <div class="header">
+            <h3 class="heading">Trending</h3>
+            <div class="toggle">
+                <a class="toggle-item" [class.active-item]="today" (click)="today=true" ><p [class.toggle-active-text]="today" class="toggle-text">Today</p></a>
+                <a class="toggle-item" [class.active-item]="!today" (click)="changeList()" ><p [class.toggle-active-text]="!today" class="toggle-text">This Week</p></a>
+            </div>
+        </div>
+        <div class="trending-cards">
+            <ng-container *ngIf="today" >
+                <app-moviecard *ngFor="let trendingEl of trendingToday" [Moviecard]="trendingEl"></app-moviecard>
+            </ng-container>
+            <ng-container *ngIf="!today" >
+                <app-moviecard *ngFor="let trendingEl of trendingWeek" [Moviecard]="trendingEl"></app-moviecard>
+            </ng-container>
+        </div>
+    </div>
+    
 </div>

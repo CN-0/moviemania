@@ -1,0 +1,13 @@
+.form{
+    margin: auto;
+    padding: 70px 40px 0px 40px;
+}
+
+input.ng-invalid.ng-touched {
+    border: 1px solid red;
+}
+
+.btn{
+    margin-top: 10px;
+}
+

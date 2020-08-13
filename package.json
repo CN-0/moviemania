@@ -3,12 +3,11 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "node server.js",
-    "build": "ng build",
+    "start": "node server/index.js",
+    "heroku-postbuild": "ng build --prod",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e",
-    "heroku-postbuild": "ng build --prod"
+    "e2e": "ng e2e"
   },
   "private": true,
   "dependencies": {
@@ -24,12 +23,17 @@
     "@angular/platform-browser-dynamic": "~10.0.5",
     "@angular/router": "~10.0.5",
     "@ng-bootstrap/ng-bootstrap": "^7.0.0",
+    "bcryptjs": "^2.4.3",
     "bootstrap": "^4.5.0",
+    "cors": "^2.8.5",
     "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.9.28",
     "path": "^0.12.7",
     "rxjs": "~6.5.5",
     "tslib": "^2.0.0",
     "typescript": "~3.9.5",
+    "validator": "^13.1.1",
     "zone.js": "~0.10.3"
   },
   "devDependencies": {

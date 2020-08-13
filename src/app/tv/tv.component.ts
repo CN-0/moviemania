@@ -4,7 +4,8 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { VedioPlayerService } from '../vedioplayer/vedioplayer.service';
 import { TvModel } from './tv.model';
-import { TvCard } from '../trending/tvcard.model';
+import { TvCard } from '../shared/tvcard.model';
+import { PostItem, PostServer } from '../postserver.service';
 
 @Component({
   selector: 'app-tv',
@@ -40,8 +41,10 @@ export class TvComponent implements OnInit {
   vedios: {id: string, iso_639_1: string, iso_3166_1: string, key: string, name: string, site: string, size: number, type: string}[];
   keywords: {id: number, name: string}[];
   genres: {};
+  item: PostItem;
 
-  constructor(private route: ActivatedRoute, private http: HttpClient, private vedioService: VedioPlayerService ) { }
+  constructor(private route: ActivatedRoute, private http: HttpClient, private vedioService: VedioPlayerService,
+              private postServer: PostServer ) { }
 
   ngOnInit(): void {
     this.route.params.subscribe((params: Params) => {
@@ -91,4 +94,14 @@ export class TvComponent implements OnInit {
     this.vedioService.vedioDataEmitter.next(key);
   }
 
+  postItemToServer(itemtype: string): void{
+    this.item = {
+      id: this.tv.id,
+      name: this.tv.name,
+      rating: this.tv.vote_average,
+      overview: this.tv.overview,
+      poster: this.tv.poster_path
+    };
+    this.postServer.postItemToSever(itemtype, this.item);
+  }
 }

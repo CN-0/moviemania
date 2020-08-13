@@ -1,4 +1,4 @@
-export class TrendingCard {
+export class MovieCard {
     constructor(
         public adult: boolean,
         public genre_ids: [],

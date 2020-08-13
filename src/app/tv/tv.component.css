@@ -250,3 +250,28 @@
     height: 55px;
     margin-top: -15px;
 }
+
+
+.items-row{
+    display: flex;
+}
+
+.add-item{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: cadetblue;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0px 10px;
+}
+.favorite{
+    margin-left: 30px;
+}
+.favorite:hover{
+    color: tomato;
+}
+.watchlist:hover{
+    color: cyan;
+}

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { TrendingCard } from '../trending/trendingcard.model';
+import { MovieCard } from '../shared/moviecard.model';
 import { environment } from '../../environments/environment';
 
 @Component({
@@ -12,7 +12,7 @@ import { environment } from '../../environments/environment';
 export class MoviespageComponent implements OnInit {
   presentRoute: string;
   loadPage = 0;
-  MoviesList: TrendingCard[] = [];
+  MoviesList: MovieCard[] = [];
   constructor(private route: ActivatedRoute, private http: HttpClient ) { }
 
   ngOnInit(): void {
@@ -26,7 +26,7 @@ export class MoviespageComponent implements OnInit {
   loadMoviesList(): void{
     this.loadPage = this.loadPage + 1;
     this.http
-        .get<{page: number, results: TrendingCard[], total_pages: number, total_results: number }>
+        .get<{page: number, results: MovieCard[], total_pages: number, total_results: number }>
         ('https://api.themoviedb.org/3/movie/' + this.presentRoute +
          '?api_key=' + environment.ApiKey + '&language=en-US&page=' + this.loadPage)
         .subscribe(response => {

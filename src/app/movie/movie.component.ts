@@ -3,8 +3,9 @@ import { ActivatedRoute, Params } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { MovieModel } from './movie.model';
-import { TrendingCard } from '../trending/trendingcard.model';
+import { MovieCard } from '../shared/moviecard.model';
 import { VedioPlayerService } from '../vedioplayer/vedioplayer.service';
+import { PostItem, PostServer } from '../postserver.service';
 
 @Component({
   selector: 'app-movie',
@@ -36,13 +37,15 @@ export class MovieComponent implements OnInit {
       profile_path?: string,
       gender?: number
     }[]};
-  recomendations: TrendingCard[];
+  recomendations: MovieCard[];
   reviews: {author: string, content: string, id: string, url: string}[];
   vedios: {id: string, iso_639_1: string, iso_3166_1: string, key: string, name: string, site: string, size: number, type: string}[];
   keywords: {id: number, name: string}[];
   genres: {};
+  item: PostItem;
 
-  constructor(private route: ActivatedRoute, private http: HttpClient, private vedioService: VedioPlayerService ) { }
+  constructor(private route: ActivatedRoute, private http: HttpClient, private vedioService: VedioPlayerService,
+              private postServer: PostServer ) { }
 
   ngOnInit(): void {
     this.route.params.subscribe((params: Params) => {
@@ -90,6 +93,17 @@ export class MovieComponent implements OnInit {
   }
   openVedio(key): void{
     this.vedioService.vedioDataEmitter.next(key);
+  }
+
+  postItemToServer(itemtype: string): void{
+    this.item = {
+      id: this.movie.id,
+      name: this.movie.title,
+      rating: this.movie.vote_average,
+      overview: this.movie.overview,
+      poster: this.movie.poster_path
+    };
+    this.postServer.postItemToSever(itemtype, this.item);
   }
 }
 

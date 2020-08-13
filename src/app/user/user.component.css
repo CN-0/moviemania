@@ -1,0 +1,36 @@
+.main-container{
+    width: 70%;
+    margin: auto;
+    margin-top: 10px;
+}
+.results{
+    display: flex;
+    flex-direction: column;
+}
+.search-result{
+    display: flex;
+    margin-bottom: 10px;
+    height: 150px;
+    cursor: pointer;
+    margin: 10px 0px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    overflow: hidden;
+}
+.image{
+    width: 100px;
+    height: 150px;
+    margin-right: 10px;
+    object-fit: cover;
+}
+.search-content{
+    padding: 10px 0px;
+}
+.rel-date{
+    color: rgb(156, 154, 154);
+    font-size: 16px;
+    margin: 0px 0px 10px 0px;
+}
+.title{
+    margin-bottom: 2px;
+}

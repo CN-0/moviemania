@@ -30,12 +30,13 @@
     font-size: 22px;
     font-weight: 700;
     color: white;
+    background-color: rgba(3, 37, 65,1);
     text-align: center;
     padding: 6px 0px;
     text-decoration: none;
 }
 .watch-now:hover{
-    color:green
+    color:rgb(48, 170, 226)
 }
 
 .content{
@@ -250,4 +251,28 @@ color: red;
 .rating{
     height: 55px;
     margin-top: -15px;
+}
+
+.items-row{
+    display: flex;
+}
+
+.add-item{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: cadetblue;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0px 10px;
+}
+.favorite{
+    margin-left: 30px;
+}
+.favorite:hover{
+    color: tomato;
+}
+.watchlist:hover{
+    color: cyan;
 }

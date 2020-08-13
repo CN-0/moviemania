@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;" >
+<nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #032541;" >
   <div class="container-fluid navDiv">
   <a  [routerLink]="['']" class="navbar-brand">Movie Mania</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" (click)="show=!show" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -6,35 +6,64 @@
   </button>
  <div class="collapse navbar-collapse" [class.show]="show"  id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item dropdown" [class.show]="showMovies">
-        <a class="nav-link" (mouseover)="showMovies = true" (mouseout)="showMovies = false" id="navbarDropdown" role="button" aria-expanded="false">
+      <li class="nav-item dropdown" (mouseover)="showMovies = true" (mouseout)="showMovies = false" [class.show]="showMovies">
+        <a class="nav-link" id="navbarDropdown" role="button" aria-expanded="false">
           Movies
         </a>
-        <div class="dropdown-menu" [class.show]="showMovies" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item"  (mouseover)="showMovies = true" (mouseout)="showMovies = false" [routerLink]="['/movies','popular']">Popular</a>
-          <a class="dropdown-item"  (mouseover)="showMovies = true" (mouseout)="showMovies = false" [routerLink]="['/movies','top_rated']">Top Rated</a>
-          <a class="dropdown-item"  (mouseover)="showMovies = true" (mouseout)="showMovies = false" [routerLink]="['/movies','now_playing']">Now Playing</a>
-          <a class="dropdown-item"  (mouseover)="showMovies = true" (mouseout)="showMovies = false" [routerLink]="['/movies','upcoming']">Up Coming</a>
+        <div class="dropdown-menu tip" [class.show]="showMovies" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item"  [routerLink]="['/movies','popular']">Popular</a>
+          <a class="dropdown-item" [routerLink]="['/movies','top_rated']">Top Rated</a>
+          <a class="dropdown-item" [routerLink]="['/movies','now_playing']">Now Playing</a>
+          <a class="dropdown-item" [routerLink]="['/movies','upcoming']">Up Coming</a>
         </div>
       </li>
-      <li class="nav-item dropdown" [class.show]="showTv">
-        <a class="nav-link" (mouseover)="showTv = true" (mouseout)="showTv = false"  id="navbarDropdown" role="button" aria-expanded="false">
+      <li class="nav-item dropdown"(mouseover)="showTv = true" (mouseout)="showTv = false" [class.show]="showTv">
+        <a class="nav-link"  id="navbarDropdown" role="button" aria-expanded="false">
           Tv Show
         </a>
-        <div class="dropdown-menu" [class.show]="showTv" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" (mouseover)="showTv = true" (mouseout)="showTv = false"  [routerLink]="['/tvshows','popular']">Popular</a>
-          <a class="dropdown-item" (mouseover)="showTv = true" (mouseout)="showTv = false"  [routerLink]="['/tvshows','top_rated']">Top Rated</a>
-          <a class="dropdown-item" (mouseover)="showTv = true" (mouseout)="showTv = false"  [routerLink]="['/tvshows','on_the_air']">On Tv</a>
-          <a class="dropdown-item" (mouseover)="showTv = true" (mouseout)="showTv = false"  [routerLink]="['/tvshows','airing_today']">Airing Today</a>
+        <div class="dropdown-menu tip" [class.show]="showTv" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item"  [routerLink]="['/tvshows','popular']">Popular</a>
+          <a class="dropdown-item"  [routerLink]="['/tvshows','top_rated']">Top Rated</a>
+          <a class="dropdown-item"  [routerLink]="['/tvshows','on_the_air']">On Tv</a>
+          <a class="dropdown-item"  [routerLink]="['/tvshows','airing_today']">Airing Today</a>
         </div>
       </li>
       <li class="nav-item people">
         <a class="nav-link" [routerLink]="['/people']">People</a>
       </li>
     </ul>
-    <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" (keyup.enter)="search()" [(ngModel)]="searchterm" [ngModelOptions]="{standalone: true}" placeholder="Search" aria-label="Search">
+    <form class="search mr-auto">
+      <input class="search-input" type="search" (keyup.enter)="search()" [(ngModel)]="searchterm" [ngModelOptions]="{standalone: true}" placeholder="Search" aria-label="Search">
+      <button class="search-button" type="button" (click)="search()">
+        <svg width=".9em" height=".9em" class="search-icon" viewBox="0 0 16 16" class="bi bi-search" fill="black" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z"/>
+          <path fill-rule="evenodd" d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z"/>
+        </svg>
+      </button>
     </form>
+    <ul class="navbar-nav" *ngIf="!isAuthenticated">
+      <li class="nav-item people">
+        <a class="nav-link" (click)="authenticate('login')">Login</a>
+      </li>
+      <li class="nav-item people">
+        <a class="nav-link" (click)="authenticate('register')">Register</a>
+      </li>
+    </ul>
+    <ul class="navbar-nav" *ngIf="isAuthenticated">
+      <li class="nav-item people">
+        <a class="nav-link" [routerLink]="['/user','watchlist']" routerLinkActive="router-link-active" >Watchlist</a>
+      </li>
+      <li class="nav-item dropdown" (mouseover)="showOptions = true" (mouseout)="showOptions = false"  [class.show]="showOptions">
+        <a  id="navbarDropdown" role="button" aria-expanded="false">
+         <p class="options">{{email}}</p>
+        </a>
+        <div class="dropdown-menu dropdown-menu-right tip-right" [class.show]="showOptions" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item"   [routerLink]="['/user','favorites']">Favorites</a>
+          <a class="dropdown-item" >Settings</a>
+          <a class="dropdown-item"   (click)="logout()" >Logout</a>
+        </div>
+      </li>
+    </ul>
   </div>
   </div>
 </nav>

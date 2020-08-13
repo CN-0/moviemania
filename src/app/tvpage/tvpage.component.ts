@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
-import { TvCard } from '../trending/tvcard.model';
+import { TvCard } from '../shared/tvcard.model';
 
 @Component({
   selector: 'app-tvpage',

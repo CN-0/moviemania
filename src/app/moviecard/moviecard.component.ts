@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { TrendingCard } from '../trending/trendingcard.model';
-import { TvCard } from '../trending/tvcard.model';
+import { MovieCard } from '../shared/moviecard.model';
+import { TvCard } from '../shared/tvcard.model';
 
 @Component({
   selector: 'app-moviecard',
@@ -8,11 +8,10 @@ import { TvCard } from '../trending/tvcard.model';
   styleUrls: ['./moviecard.component.css']
 })
 export class MoviecardComponent implements OnInit {
-  @Input() Moviecard: TrendingCard;
+  @Input() Moviecard: MovieCard;
   @Input() Tvcard: TvCard;
   constructor() { }
 
   ngOnInit(): void {
   }
-
 }

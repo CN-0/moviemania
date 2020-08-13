@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
-import { TrendingCard } from '../trending/trendingcard.model';
+import { MovieCard } from '../shared/moviecard.model';
 import { People } from '../peoplespage/people.model';
 
 @Component({
@@ -14,8 +14,8 @@ export class SearchComponent implements OnInit {
   searchterm: string;
   page = {movie: 0, tv: 0, person: 0, keyword: 0};
   type = 'movie';
-  MovieList: TrendingCard[] = [];
-  TvList: TrendingCard[] = [];
+  MovieList: MovieCard[] = [];
+  TvList: MovieCard[] = [];
   PersonList: People[] = [];
   KeyWords: {id: number, name: string}[] = [];
   constructor(private route: ActivatedRoute, private http: HttpClient) { }
@@ -23,6 +23,8 @@ export class SearchComponent implements OnInit {
   ngOnInit(): void {
     this.route.params.subscribe((params: Params) => {
       this.searchterm = params.id;
+      this.MovieList = [];
+      this.page = {movie: 0, tv: 0, person: 0, keyword: 0};
       this.searchMovie();
     });
   }
@@ -32,8 +34,9 @@ export class SearchComponent implements OnInit {
     this.PersonList = [];
     this.TvList = [];
     this.KeyWords = [];
+    if (!this.searchterm) { return null; }
     this.http
-      .get<{page: number, results: TrendingCard[], total_pages: number, total_results: number}>
+      .get<{page: number, results: MovieCard[], total_pages: number, total_results: number}>
       ('https://api.themoviedb.org/3/search/movie?api_key=' + environment.ApiKey + '&language=en-US&query=' +
       this.searchterm + '&page=' + this.page.movie + '&include_adult=true')
       .subscribe(response => {
@@ -47,7 +50,7 @@ export class SearchComponent implements OnInit {
     this.PersonList = [];
     this.KeyWords = [];
     this.http
-      .get<{page: number, results: TrendingCard[], total_pages: number, total_results: number}>
+      .get<{page: number, results: MovieCard[], total_pages: number, total_results: number}>
       ('https://api.themoviedb.org/3/search/tv?api_key=' + environment.ApiKey + '&language=en-US&page=' +
       this.page.tv + '&query=' + this.searchterm + '&include_adult=true')
       .subscribe(response => {

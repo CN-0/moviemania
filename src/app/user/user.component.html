@@ -1,0 +1,39 @@
+<div class="main-container">
+    <nav ngbNav #nav="ngbNav" class="nav-tabs">
+        <ng-container ngbNavItem>
+          <a ngbNavLink>Movies</a>
+          <ng-template ngbNavContent>
+              <div class="results" *ngIf="firstPage">
+                  <div *ngFor="let item of firstPage">
+                      <div class="search-result"  [routerLink]="['/movie',item.id]">
+                          <img class="image" src="{{'http://image.tmdb.org/t/p/w300'+item.poster}}">
+                          <div class="search-content">
+                              <h5 class="title">{{item.name || item.title}}</h5>
+                              <p class="rel-date">{{item.rating || item.first_air_date}}</p>
+                              <p class="overview">{{item.overview | slice:0:200}}</p>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </ng-template>
+        </ng-container>
+        <ng-container ngbNavItem>
+          <a ngbNavLink>Tv Shows</a>
+          <ng-template ngbNavContent>
+              <div class="results" *ngIf="secondPage">
+                  <div *ngFor="let item of secondPage">
+                      <div class="search-result"  [routerLink]="['/tv',item.id]">
+                          <img class="image" src="{{'http://image.tmdb.org/t/p/w300'+item.poster}}">
+                          <div class="search-content">
+                              <h5 class="title">{{item.name || item.title}}</h5>
+                              <p class="rel-date">{{item.rating || item.first_air_date}}</p>
+                              <p class="overview">{{item.overview | slice:0:200}}</p>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </ng-template>
+        </ng-container>
+      </nav>
+      <div [ngbNavOutlet]="nav" class="mt-2"></div>
+</div>
