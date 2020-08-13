@@ -28,7 +28,7 @@ export class AuthService {
 
   authenticate(type: string, email: string, password: string): void {
     this.http
-      .post<AuthResponseData>(`http://localhost:5000/users/${type}`, { email, password })
+      .post<AuthResponseData>(`/users/${type}`, { email, password })
       .pipe(
         catchError(this.handleError),
         tap((resData: AuthResponseData) => {
