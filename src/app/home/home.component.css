@@ -21,3 +21,87 @@
 }
 
 /*box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)*/
+
+.trailer-trending{
+  width: 100%;
+  height: 260px;
+  margin: 20px 0px 15px 0px;
+  background-size: cover;
+  background-position: center center;
+}
+.trailer-header{
+  display: flex;
+  height: 45px;
+  align-items: center;
+}
+.trailer-heading{
+  margin-left: 0px;
+  color: white;
+  margin: 15px 0px 10px 20px;
+  line-height: 1;
+}
+
+.trailers{
+  display: flex;
+  overflow-x: auto;
+}
+.trailers::-webkit-scrollbar {
+  display: none;
+}
+
+.trailercard{
+  width: 300px;
+  height: 220px;
+  overflow: hidden;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+.cardheader{
+  width: 280px;
+  height: 200;
+  position: relative;
+  transition: all .25s;
+}
+.cardheader:hover{
+  transform: scale(1.05);
+  border-radius: 10px;
+  overflow: hidden;
+}
+.image{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 8px;
+}
+.content{
+  width: 100%;
+  height: 35px;
+  display: flex;
+  align-self: flex-end;
+  justify-self: flex-end;
+  justify-content: center;
+  align-items: center;
+  padding: 0 7px;
+  flex-direction: column;
+}
+.trailer-title{
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 22px;
+  color: white;
+}
+.play{
+  width: 75px;
+  height: 75px;
+  fill: rgba(255, 255, 255, .85);
+  position: absolute;
+  top: 25%;
+  left: 37%;;
+}
+.cardheader:hover .play{
+  transform: scale(1.2);
+}
+

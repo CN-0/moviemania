@@ -3,6 +3,7 @@ import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http
 import { Router } from '@angular/router';
 import { catchError, tap, take, exhaustMap } from 'rxjs/operators';
 import { throwError, BehaviorSubject } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 export class User {
     constructor(
@@ -28,7 +29,7 @@ export class AuthService {
 
   authenticate(type: string, email: string, password: string): void {
     this.http
-      .post<AuthResponseData>(`/users/${type}`, { email, password })
+      .post<AuthResponseData>(environment.serverURL + '/users/' + type, { email, password })
       .pipe(
         catchError(this.handleError),
         tap((resData: AuthResponseData) => {
@@ -62,7 +63,7 @@ export class AuthService {
           throw new Error ('plz do Authenticate');
         }
         return this.http
-        .post('http://localhost:5000/users/logout', {logout: 'logout'}, {headers: new HttpHeaders({Authorization: user.userToken})});
+        .post(environment.serverURL + '/users/logout', {logout: 'logout'}, {headers: new HttpHeaders({Authorization: user.userToken})});
       })).subscribe(response => {
         this.user.next(null);
         this.router.navigate(['']);

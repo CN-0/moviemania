@@ -1,7 +1,0 @@
-<div class="movies-page">
-    <h2 class="heading">{{presentRoute}}</h2>
-    <div class="moviesList">
-        <app-moviecard *ngFor="let item of TvShowsList" [Tvcard]="item"></app-moviecard>
-    </div>
-    <a class="button" (click)="loadTvShowsList()">Load More Movies</a>
-</div>

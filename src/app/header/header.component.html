@@ -11,10 +11,10 @@
           Movies
         </a>
         <div class="dropdown-menu tip" [class.show]="showMovies" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item"  [routerLink]="['/movies','popular']">Popular</a>
-          <a class="dropdown-item" [routerLink]="['/movies','top_rated']">Top Rated</a>
-          <a class="dropdown-item" [routerLink]="['/movies','now_playing']">Now Playing</a>
-          <a class="dropdown-item" [routerLink]="['/movies','upcoming']">Up Coming</a>
+          <a class="dropdown-item"  [routerLink]="['/lists','movie','popular']">Popular</a>
+          <a class="dropdown-item" [routerLink]="['/lists','movie','top_rated']">Top Rated</a>
+          <a class="dropdown-item" [routerLink]="['/lists','movie','now_playing']">Now Playing</a>
+          <a class="dropdown-item" [routerLink]="['/lists','movie','upcoming']">Up Coming</a>
         </div>
       </li>
       <li class="nav-item dropdown"(mouseover)="showTv = true" (mouseout)="showTv = false" [class.show]="showTv">
@@ -22,10 +22,10 @@
           Tv Show
         </a>
         <div class="dropdown-menu tip" [class.show]="showTv" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item"  [routerLink]="['/tvshows','popular']">Popular</a>
-          <a class="dropdown-item"  [routerLink]="['/tvshows','top_rated']">Top Rated</a>
-          <a class="dropdown-item"  [routerLink]="['/tvshows','on_the_air']">On Tv</a>
-          <a class="dropdown-item"  [routerLink]="['/tvshows','airing_today']">Airing Today</a>
+          <a class="dropdown-item"  [routerLink]="['/lists','tv','popular']">Popular</a>
+          <a class="dropdown-item"  [routerLink]="['/lists','tv','top_rated']">Top Rated</a>
+          <a class="dropdown-item"  [routerLink]="['/lists','tv','on_the_air']">On Tv</a>
+          <a class="dropdown-item"  [routerLink]="['/lists','tv','airing_today']">Airing Today</a>
         </div>
       </li>
       <li class="nav-item people">

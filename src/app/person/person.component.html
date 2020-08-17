@@ -1,0 +1,83 @@
+<div class="movie">
+    <div *ngIf="person" class="header">
+        <div class="poster">
+            <img *ngIf="person.profile_path" class="image" src="{{'http://image.tmdb.org/t/p/w342'+person.profile_path}}">
+            <img *ngIf="!person.profile_path" class="image" src="../../assets/mm-default-profile-picture.png">
+        </div>
+        <div class="content">
+            <div class="title">
+                {{person.name}}
+            </div>
+            <div class="description">
+                <h4>Biography</h4>
+                <p>{{person.biography}}</p>
+            </div>
+        </div>
+    </div>
+    <div class="personbody">
+        <div *ngIf="person" class="about">
+            <h4>Personal Info</h4>
+            <div class="about-contentDiv">
+                <p class="about-heading">Known For</p>
+                <p class="about-content">
+                    {{person.known_for_department}}
+                </p>
+            </div>
+            <div class="about-contentDiv">
+                <p class="about-heading">Gender</p>
+                <p class="about-content">
+                    {{person.gender===1?"Female":"Male"}}
+                </p>
+            </div>
+            <div *ngIf="person.birthday" class="about-contentDiv">
+                <p class="about-heading">Birthday</p>
+                <p class="about-content">
+                    {{person.birthday}}
+                </p>
+            </div>
+            <div *ngIf="person.place_of_birth" class="about-contentDiv">
+                <p class="about-heading">Place of Birth</p>
+                <p class="about-content">
+                    {{person.place_of_birth}}
+                </p>
+            </div>
+            <div *ngIf="person.deathday" class="about-contentDiv">
+                <p class="about-heading">Deathday</p>
+                <p class="about-content">
+                    {{person.deathday}}
+                </p>
+            </div>
+            <div class="about-contentDiv">
+                <p class="about-heading">Also Known As</p>
+                <div *ngFor="let item of person.also_known_as" class="alsoknownas">
+                    <p class="about-content">
+                        {{item}}
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div *ngIf="credits" class="filmography">
+            <h4>Filmography</h4>
+            <div *ngIf="credits.cast" class="fl-content-div">
+                <h5>As a Actor</h5>
+                <div *ngFor="let item of credits.cast">
+                    <div *ngIf="item.release_date" class="filmographyDiv">
+                        <p class="releasedate">{{item.release_date}}</p>
+                        <p class="fl-moviename">In {{item.title}}</p>
+                        <p>as {{item.character}}</p>
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="credits.crew" class="fl-content-div">
+                <h5>As a Technician</h5>
+                <div *ngFor="let item of credits.crew">
+                    <div *ngIf="item.release_date" class="filmographyDiv">
+                        <p class="releasedate">{{item.release_date}}</p>
+                        <p class="fl-moviename">In {{item.title}}</p>
+                        <p>as {{item.job}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

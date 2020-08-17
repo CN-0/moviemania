@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
-import { MovieCard } from '../shared/moviecard.model';
+import { Card } from '../shared/card.model';
 
 export class TrendingData {
   constructor(
@@ -18,7 +18,7 @@ export class HomePage {
     constructor(private http: HttpClient){}
     getPopularList(): any{
       return this.http
-      .get<{page: number, results: MovieCard[], total_pages: number, total_results: number }>('https://api.themoviedb.org/3/movie/popular?api_key=' + environment.ApiKey + '&language=en-US&page=1');
+      .get<{page: number, results: Card[], total_pages: number, total_results: number }>('https://api.themoviedb.org/3/movie/popular?api_key=' + environment.ApiKey + '&language=en-US&page=1');
     }
     getOnTv(): any{
       return this.http
@@ -31,7 +31,7 @@ export class HomePage {
     }
     getTrendingDaily(): any{
       return this.http
-      .get<{page: number; results: MovieCard[]; total_pages: number, total_results: number }>('https://api.themoviedb.org/3/trending/all/day?api_key=' + environment.ApiKey);
+      .get<{page: number; results: Card[]; total_pages: number, total_results: number }>('https://api.themoviedb.org/3/trending/all/day?api_key=' + environment.ApiKey);
     }
     getTrendingWeekly(): any{
       return this.http

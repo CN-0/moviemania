@@ -13,7 +13,7 @@ router.post('/register',async (req,res)=>{
     }catch(e){
         res.status(400).json({msg:e.message})
     }
-    
+
 })
 
 router.post('/login',async (req,res)=>{
@@ -24,7 +24,7 @@ router.post('/login',async (req,res)=>{
     }catch(e){
         res.status(409).json({msg:e.message})
     }
-    
+
 })
 
 router.post('/additem', auth, async (req,res)=>{
@@ -40,7 +40,7 @@ router.post('/additem', auth, async (req,res)=>{
     }catch(e){
         res.status(409).json({msg:e.message})
     }
-    
+
 })
 
 
@@ -50,7 +50,7 @@ router.get('/favorites', auth, async (req,res)=>{
     }catch(e){
         res.status(409).json({msg:e.message})
     }
-    
+
 })
 
 
@@ -60,7 +60,7 @@ router.get('/watchlist', auth, async (req,res)=>{
     }catch(e){
         res.status(409).json({msg:e.message})
     }
-    
+
 })
 
 router.post('/logout',auth, async (req,res)=>{

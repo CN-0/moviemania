@@ -8,8 +8,8 @@
                       <div class="search-result"  [routerLink]="['/movie',item.id]">
                           <img class="image" src="{{'http://image.tmdb.org/t/p/w300'+item.poster}}">
                           <div class="search-content">
-                              <h5 class="title">{{item.name || item.title}}</h5>
-                              <p class="rel-date">{{item.rating || item.first_air_date}}</p>
+                              <h5 class="title">{{item.name}}</h5>
+                              <p class="rel-date">{{item.rating}}</p>
                               <p class="overview">{{item.overview | slice:0:200}}</p>
                           </div>
                       </div>
@@ -25,8 +25,8 @@
                       <div class="search-result"  [routerLink]="['/tv',item.id]">
                           <img class="image" src="{{'http://image.tmdb.org/t/p/w300'+item.poster}}">
                           <div class="search-content">
-                              <h5 class="title">{{item.name || item.title}}</h5>
-                              <p class="rel-date">{{item.rating || item.first_air_date}}</p>
+                              <h5 class="title">{{item.name}}</h5>
+                              <p class="rel-date">{{item.rating}}</p>
                               <p class="overview">{{item.overview | slice:0:200}}</p>
                           </div>
                       </div>

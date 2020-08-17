@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { AuthService } from '../auth/auth.service';
 import { exhaustMap, take, catchError } from 'rxjs/operators';
+import { environment } from '../../environments/environment';
 
 @Injectable({providedIn: 'root'})
 export class FetchData{
@@ -15,7 +16,7 @@ export class FetchData{
                 throw new Error ('plz do Authenticate');
               }
               return this.http
-              .get('/users/watchlist', {headers: new HttpHeaders({Authorization: user.userToken})});
+              .get(environment.serverURL + '/users/watchlist', {headers: new HttpHeaders({Authorization: user.userToken})});
             })
         );
     }
@@ -27,7 +28,7 @@ export class FetchData{
                 throw new Error ('plz do Authenticate');
               }
               return this.http
-              .get('/users/favorites', {headers: new HttpHeaders({Authorization: user.userToken})});
+              .get(environment.serverURL + '/users/favorites', {headers: new HttpHeaders({Authorization: user.userToken})});
             })
         );
     }

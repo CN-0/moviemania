@@ -1,6 +1,9 @@
 <div class="row">
     <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2 form">
-        <form [formGroup]="presentRoute==='register'?SignUpForm:LoginForm" (ngSubmit)="onSubmit()">
+      <div style="text-align: center;" *ngIf="loading">
+        <app-loading></app-loading>
+      </div>
+        <form *ngIf="!loading" [formGroup]="presentRoute==='register'?SignUpForm:LoginForm" (ngSubmit)="onSubmit()">
             <div class="form-group">
                 <label for="email">E-mail</label>
                 <input type="email" id="input" class="form-control" formControlName="email" />

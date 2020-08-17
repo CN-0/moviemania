@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { FetchData } from './fetchdata.service';
-import { PostItem } from '../postserver.service';
+import { PostItem } from '../itempage/postserver.service';
 
 @Component({
   selector: 'app-user',

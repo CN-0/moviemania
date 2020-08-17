@@ -32,7 +32,7 @@ export class VedioplayerComponent implements OnInit, OnDestroy {
     this.vedioservice.vedioDataEmitter
       .subscribe(data => {
         this.vedioKey = data;
-        this.safeURL = this._sanitizer.bypassSecurityTrustResourceUrl('https://www.youtube.com/embed/' + this.vedioKey);
+        this.safeURL = this._sanitizer.bypassSecurityTrustResourceUrl('https://www.youtube.com/embed/' + this.vedioKey + '?enablejsapi=1&origin=https://moviemania7.herokuapp.com/');
         this.openBackDropCustomClass(this.vedioContent);
       });
   }

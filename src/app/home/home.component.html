@@ -1,15 +1,15 @@
 <div class="home">
     <div class='car' *ngIf="CarousalData">
-        <ngb-carousel> 
-            <ng-template ngbSlide *ngFor="let item of CarousalData">  
+        <ngb-carousel>
+            <ng-template ngbSlide *ngFor="let item of CarousalData">
             <div class="picsum-img-wrapper">
-              <img src="{{'http://image.tmdb.org/t/p/original'+item.backdrop_path}}" class="img-fluid rounded carousel-image" alt={{item.title}}> 
+              <img src="{{'http://image.tmdb.org/t/p/w1280'+item.backdrop_path}}" class="img-fluid rounded carousel-image" alt={{item.title}}>
             </div>
             <div class="carousel-caption">
               <h3 class="title">{{item.title || item.name}}</h3>
             </div>
-          </ng-template> 
-        </ngb-carousel>  
+          </ng-template>
+        </ngb-carousel>
     </div>
     <div class="trending" *ngIf="Streaming">
         <div class="header">
@@ -22,17 +22,38 @@
         </div>
         <div class="trending-cards">
             <ng-container *ngIf="display==='streaming'" >
-                <app-moviecard *ngFor="let popularEl of Streaming" [Moviecard]="popularEl"></app-moviecard>
+                <app-moviecard *ngFor="let popularEl of Streaming" [type]="'movie'" [card]="popularEl"></app-moviecard>
             </ng-container>
             <ng-container *ngIf="display==='ontv'" >
-                <app-moviecard *ngFor="let popularEl of Ontv" [Tvcard]="popularEl"></app-moviecard>
+                <app-moviecard *ngFor="let popularEl of Ontv" [type]="'tv'" [card]="popularEl"></app-moviecard>
             </ng-container>
             <ng-container *ngIf="display==='intheaters'" >
-                <app-moviecard *ngFor="let popularEl of Intheaters" [Moviecard]="popularEl"></app-moviecard>
+                <app-moviecard *ngFor="let popularEl of Intheaters" [type]="'movie'" [card]="popularEl"></app-moviecard>
             </ng-container>
         </div>
-    </div>    
-    <app-trailers *ngIf="trendingToday" [trailersData]="trendingToday" [backgroundImage]="trendingToday[0].backdrop_path" ></app-trailers>  
+    </div>
+    <ng-container *ngIf="trendingToday">
+      <div class="trailer-trending" [style.background-image]="'linear-gradient(to right, rgba(3,37,65, 0.60) 0%, rgba(3,37,65, 0.60) 100%), url(http://image.tmdb.org/t/p/w500'+backgroundImage+')'" >
+          <div class="trailer-header">
+              <h3 class="trailer-heading">Trailers</h3>
+          </div>
+          <div class="trailers">
+              <div  *ngFor="let trailerEl of trendingToday">
+                  <div class="trailercard" (click)="openVedio(trailerEl.id)" (mouseover)="backgroundImage=trailerEl.backdrop_path">
+                      <div class="cardheader">
+                          <img class="image" src="{{'http://image.tmdb.org/t/p/w300'+trailerEl.backdrop_path}}">
+                          <svg viewBox="0 0 16 16" class="bi bi-play-fill play" xmlns="http://www.w3.org/2000/svg">
+                              <path d="M11.596 8.697l-6.363 3.692c-.54.313-1.233-.066-1.233-.697V4.308c0-.63.692-1.01 1.233-.696l6.363 3.692a.802.802 0 0 1 0 1.393z"/>
+                          </svg>
+                      </div>
+                      <div class="content">
+                          <p class="trailer-title">{{ trailerEl.title || trailerEl.name }}</p>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </ng-container>
     <div class="trending" *ngIf="trendingToday">
         <div class="header">
             <h3 class="heading">Trending</h3>
@@ -43,12 +64,12 @@
         </div>
         <div class="trending-cards">
             <ng-container *ngIf="today" >
-                <app-moviecard *ngFor="let trendingEl of trendingToday" [Moviecard]="trendingEl"></app-moviecard>
+                <app-moviecard *ngFor="let trendingEl of trendingToday" [type]="'movie'" [card]="trendingEl"></app-moviecard>
             </ng-container>
             <ng-container *ngIf="!today" >
-                <app-moviecard *ngFor="let trendingEl of trendingWeek" [Moviecard]="trendingEl"></app-moviecard>
+                <app-moviecard *ngFor="let trendingEl of trendingWeek" [type]="'movie'" [card]="trendingEl"></app-moviecard>
             </ng-container>
         </div>
     </div>
-    
+
 </div>

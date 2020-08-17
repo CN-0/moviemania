@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { AuthService } from './auth.service';
 
@@ -13,8 +12,9 @@ export class AuthComponent implements OnInit {
   presentRoute: string ;
   SignUpForm: FormGroup = new FormGroup({});
   LoginForm: FormGroup;
+  loading = false;
 
-  constructor(private route: ActivatedRoute, private http: HttpClient, private fb: FormBuilder, private authService: AuthService) {
+  constructor(private route: ActivatedRoute, private fb: FormBuilder, private authService: AuthService) {
     this.SignUpForm = fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
@@ -34,8 +34,7 @@ export class AuthComponent implements OnInit {
     });
   }
 
-  // tslint:disable-next-line: typedef
-  ConfirmedValidator(controlName: string, matchingControlName: string){
+  ConfirmedValidator(controlName: string, matchingControlName: string): any{
     return (formGroup: FormGroup) => {
         const control = formGroup.controls[controlName];
         const matchingControl = formGroup.controls[matchingControlName];
@@ -50,7 +49,8 @@ export class AuthComponent implements OnInit {
     };
   }
 
-  onSubmit(): void{
+  onSubmit(): any{
+    this.loading = true;
     if (this.presentRoute === 'register'){
       this.authService.authenticate('register', this.SignUpForm.value.email, this.SignUpForm.value.password);
     }else{

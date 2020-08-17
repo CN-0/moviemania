@@ -13,7 +13,8 @@
             <ng-container *ngIf="MovieList">
                 <div *ngFor="let item of MovieList">
                     <div class="search-result"  [routerLink]="['/movie',item.id]">
-                        <img class="image" src="{{'http://image.tmdb.org/t/p/w300'+item.poster_path}}">
+                        <img *ngIf="item.poster_path" class="image" src="{{'http://image.tmdb.org/t/p/w300'+item.poster_path}}">
+                        <img *ngIf="!item.poster_path" class="image" src="../../assets/mm-default-profile-picture.png">
                         <div class="search-content">
                             <h5 class="title">{{item.name || item.title}}</h5>
                             <p class="rel-date">{{item.release_date || item.first_air_date}}</p>
@@ -25,7 +26,8 @@
             <ng-container *ngIf="TvList">
                 <div *ngFor="let item of TvList">
                     <div class="search-result" [routerLink]="['/tv',item.id]">
-                        <img class="image" src="{{'http://image.tmdb.org/t/p/w300'+item.poster_path}}">
+                        <img *ngIf="item.poster_path" class="image" src="{{'http://image.tmdb.org/t/p/w300'+item.poster_path}}">
+                        <img *ngIf="!item.poster_path" class="image" src="../../assets/mm-default-profile-picture.png">
                         <div class="search-content">
                             <h5 class="title">{{item.name || item.title}}</h5>
                             <p class="rel-date">{{item.release_date || item.first_air_date}}</p>
@@ -37,14 +39,15 @@
             <ng-container *ngIf="PersonList">
                 <div *ngFor="let item of PersonList; let i = index">
                     <div class="search-result" [routerLink]="['/person',item.id]">
-                        <img class="image" src="{{'http://image.tmdb.org/t/p/w300'+item.profile_path}}">
+                        <img *ngIf="item.profile_path" class="image" src="{{'http://image.tmdb.org/t/p/w300'+item.profile_path}}">
+                        <img *ngIf="!item.profile_path" class="image" src="../../assets/mm-default-profile-picture.png">
                         <div class="search-content">
                             <h5 class="title">{{item.name}}</h5>
                             <p class="rel-date">{{item.known_for_department}}</p>
                             <div class="knownfor">
                                 <div *ngFor="let kfitem of item.known_for" >
                                     <p class="knownfor-item">{{kfitem.name || kfitem.title}}</p>
-                                </div> 
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -59,5 +62,5 @@
             </ng-container>
         </div>
     </div>
-    <a class="button" (click)="loadMore()">Load More</a> 
+    <a class="button" (click)="loadMore()">Load More</a>
 </div>

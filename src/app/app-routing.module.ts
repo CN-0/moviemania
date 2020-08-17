@@ -1,32 +1,19 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-import { HomeComponent } from './home/home.component';
-import { MovieComponent } from './movie/movie.component';
-import { TvComponent } from './tv/tv.component';
-import { MoviespageComponent } from './moviespage/moviespage.component';
-import { TvpageComponent } from './tvpage/tvpage.component';
-import { PeoplespageComponent } from './peoplespage/peoplespage.component';
-import { PeopleComponent } from './people/people.component';
-import { SearchComponent } from './search/search.component';
-import { AuthComponent } from './auth/auth.component';
-import { AuthGuard } from './auth/auth.guard';
-import { UserComponent } from './user/user.component';
+import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
 
 const appRoutes: Routes = [
-  { path: '', component: HomeComponent },
-  { path: 'people', component: PeoplespageComponent },
-  { path: 'user/:id', component: UserComponent, canActivate: [AuthGuard] },
-  {path: 'auth/:id', component: AuthComponent },
-  { path: 'movie/:id', component: MovieComponent },
-  { path: 'tv/:id', component: TvComponent },
-  { path: 'movies/:id', component: MoviespageComponent },
-  { path: 'tvshows/:id', component: TvpageComponent },
-  { path: 'person/:id', component: PeopleComponent },
-  {path: 'search/:id', component: SearchComponent }
+  { path: '', loadChildren: () => import('./home/home.module').then(m => m.HomeModule) },
+  { path: 'people', loadChildren: () => import('./peoplespage/peoplepage.module').then(m => m.PeoplepageModule) },
+  { path: 'user/:id', loadChildren: () => import('./user/user.module').then(m => m.UserModule) },
+  {path: 'auth/:id', loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule)},
+  { path: 'person/:id', loadChildren: () => import('./person/person.module').then(m => m.PersonModule) },
+  {path: 'search/:id', loadChildren: () => import('./search/search.Module').then(m => m.SearchModule) },
+  { path: ':type/:id', loadChildren: () => import('./itempage/item.module').then(m => m.ItemModule) },
+  { path: 'lists/:type/:id', loadChildren: () => import('./lists/lists.module').then(m => m.ListsModule)}
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(appRoutes)],
+  imports: [RouterModule.forRoot(appRoutes, { preloadingStrategy: PreloadAllModules, initialNavigation: 'enabled' })],
   exports: [RouterModule]
 })
 export class AppRoutingModule {}
