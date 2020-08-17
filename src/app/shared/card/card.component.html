@@ -7,7 +7,7 @@
       <div class="content">
           <div class="rating" >
               <div class="single-chart">
-                  <svg viewBox="0 0 36 36" class="circular-chart" [class.green]="card.vote_average>7"  [class.orange]="(card.vote_average<7&&card.vote_average>4)"   [class.red]="card.vote_average<4"   >
+                  <svg viewBox="0 0 36 36" class="circular-chart" [class.green]="card.vote_average>=7"  [class.orange]="(card.vote_average<7&&card.vote_average>4)"   [class.red]="card.vote_average<=4"   >
                     <path class="circle-bg"
                       d="M18 2.0845
                         a 15.9155 15.9155 0 0 1 0 31.831

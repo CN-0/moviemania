@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   ApiKey: '7eebbba7a440c5e9c572a163e36d7c24',
-  serverURL: 'http://localhost:5000'
+  serverURL: ''
 };
 
 /*

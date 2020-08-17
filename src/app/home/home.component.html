@@ -39,9 +39,10 @@
           </div>
           <div class="trailers">
               <div  *ngFor="let trailerEl of trendingToday">
-                  <div class="trailercard" (click)="openVedio(trailerEl.id)" (mouseover)="backgroundImage=trailerEl.backdrop_path">
-                      <div class="cardheader">
-                          <img class="image" src="{{'http://image.tmdb.org/t/p/w300'+trailerEl.backdrop_path}}">
+                  <div class="trailercard" (click)="openVedio(trailerEl.id)">
+                      <div class="cardheader" >
+                          <img *ngIf="trailerEl.backdrop_path" class="image" src="{{'http://image.tmdb.org/t/p/w300'+trailerEl.backdrop_path}}"  (mouseover)="backgroundImage=trailerEl.backdrop_path">
+                          <img *ngIf="!trailerEl.backdrop_path" class="image" src="../../assets/mm-default-profile-picture.png">
                           <svg viewBox="0 0 16 16" class="bi bi-play-fill play" xmlns="http://www.w3.org/2000/svg">
                               <path d="M11.596 8.697l-6.363 3.692c-.54.313-1.233-.066-1.233-.697V4.308c0-.63.692-1.01 1.233-.696l6.363 3.692a.802.802 0 0 1 0 1.393z"/>
                           </svg>
