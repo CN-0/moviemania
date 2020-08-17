@@ -12,7 +12,7 @@ app.use('/users',userRouter)
 app.use(express.static('dist/first-app'));
 
 app.get('/*', (req,res)=>{
-    res.sendFile(path.join(__dirname, '../dist', 'first-app', 'index.html'))
+    res.sendFile(path.join(__dirname, '../dist', 'first-app', 'browser', 'index.html'))
 })
 
 app.listen(process.env.PORT || 5000, () => console.log(`Listening Socket on ${ process.env.PORT || 5000 }`));
